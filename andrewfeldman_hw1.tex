@@ -1,0 +1,144 @@
+\documentclass[12pt,letterpaper]{article}
+\usepackage{fullpage}
+\usepackage[top=2cm, bottom=4.5cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage{amsmath,amsthm,amsfonts,amssymb,amscd}
+\usepackage{lastpage}
+\usepackage{enumitem}
+\usepackage{fancyhdr}
+\usepackage{mathrsfs}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{palatino}
+\usepackage{natbib}
+\usepackage{xcolor}
+\usepackage[capitalize]{cleveref}
+\usepackage{xspace}
+\usepackage{inconsolata}
+\usepackage{tikz}
+
+\newcommand{\transpose}{\mathsf{T}}
+\newcommand{\hadamard}{\odot}
+
+\definecolor{param_color}{rgb}{0.82352941, 0.91764706, 0.96862745}
+\definecolor{data_color}{rgb}{0.96078431, 0.8627451 , 0.85490196}
+\definecolor{param_color_dark}{rgb}{0.2, 0.6, 1.0}
+\definecolor{data_color_dark}{rgb}{1.0, 0.4, 0.38}
+\definecolor{comp_graph_param_grad_bcolor}{rgb}{0.97,0.88,0.35}
+
+% https://tex.stackexchange.com/questions/27279/how-to-make-an-arrow-bigger-and-change-its-color-in-tikz/27287#27287
+\tikzset{
+  nn_edge/.style={
+    decoration={markings,mark=at position 1 with {\arrow[scale=0.9]{spaced latex}}},
+    postaction={decorate},
+    shorten >=3.0pt
+}}
+
+\usetikzlibrary{arrows,arrows.spaced,arrows.meta,decorations.markings,calc,plotmarks}
+
+\input{notation/math_notation}
+\newcommand{\given}{\mathrel{\vert}}
+\newcommand*{\eg}{e.g.\@\xspace}
+\newcommand*{\ie}{i.e.\@\xspace}
+\newcommand*{\Eg}{E.g.\@\xspace}
+\newcommand*{\Ie}{I.e.\@\xspace}
+\newcommand*{\esp}{esp.\@\xspace}
+\newcommand*{\wrt}{\ifmmode \stext{w.r.t.} \else w.r.t.\@\xspace \fi}
+\newcommand*{\aever}{\ifmmode \stext{a.e.} \else a.e.\@\xspace \fi}
+\newcommand*{\asurely}{\ifmmode \stext{a.s.} \else a.s.\@\xspace \fi}
+% \newcommand*{\st}{\ifmmode \stext{s.t.} \else s.t.\@\xspace \fi}
+\newcommand*{\wprob}{\ifmmode \stext{w.p.} \else w.p.\@\xspace \fi}
+\newcommand*{\etc}{%
+    \@ifnextchar{.}%
+        {etc}%
+        {etc.\@\xspace}%
+}
+\newcommand{\lhs}[0]{\hspace{2em}&\hspace{-2em}}
+\newcommand{\trieq}[0]{\triangleq}
+\newcommand{\eqin}[1]{\overset{#1}{=}}
+\newcommand{\defeq}[0]{\overset{\mbox{\normalfont\tiny def}}{=}}
+
+\hypersetup{%
+  colorlinks=true,
+  linkcolor=blue,
+  linkbordercolor={0 0 1},
+  citecolor=[rgb]{0,0.55,0.27}
+}
+ 
+\renewcommand\lstlistingname{Algorithm}
+\renewcommand\lstlistlistingname{Algorithms}
+\def\lstlistingautorefname{Alg.}
+
+\lstdefinestyle{Python}{
+    language        = Python,
+    frame           = lines, 
+    basicstyle      = \footnotesize,
+    keywordstyle    = \color{blue},
+    stringstyle     = \color{green},
+    commentstyle    = \color{red}\ttfamily
+}
+
+\setlength{\parindent}{0.0in}
+\setlength{\parskip}{0.1in}
+\setlist[enumerate]{parsep=5pt}
+
+% Edit these as appropriate
+\newcommand\course{6.S898 Deep Learning}
+\newcommand\hwnumber{1}                  % <-- homework number
+
+\pagestyle{fancyplain}
+\headheight 40pt
+\lhead{}
+% \lhead{\NetIDa}
+% \lhead{\NetIDa\\\NetIDb}                 % <-- Comment this line out for problem sets (make sure you are person #1)
+\chead{\textbf{\Large Math Notation}}
+\rhead{\course \\ Fall 2023}
+\lfoot{}
+\cfoot{}
+\rfoot{\small\thepage}
+\headsep 1.5em
+
+\newcommand{\fixme}[1]{{\color{red} \bf FIXME: #1}}
+\newcommand{\answer}[1]{{\color{red}\textbf{Answer}: #1}}
+% \renewcommand{\answer}[1]{}
+
+\begin{document}
+
+\newcommand{\xin}{\mathbf{x}_{\texttt{in}}}
+\newcommand{\xout}{\mathbf{x}_{\texttt{out}}}
+\newcommand{\xini}{x_{\texttt{in}_i}}
+\newcommand{\xouti}{x_{\texttt{out}_i}}
+\newcommand{\xink}{x_{\texttt{in}_k}}
+
+In deep learning we encounter many different fields and each has its own notation. We will stick to the following conventions throughout most of this course, and note it when we deviate from these rules. To define the conventions we give examples of usage, from which you can infer the pattern.
+
+\section{Approximation}
+
+\paragraph{Problem 1}
+
+\begin{itemize}
+\item $\mathbf{b_1} \in \mathbb{R}^{k \times 1}$
+\item $\mathbf{W_2} \in \mathbb{R}^{1 \times k}$
+\item $\mathbf{b_2} \in \mathbb{R}^{1 \times 1}$
+\end{itemize}
+
+\paragraph{Problem 2}
+
+\begin{itemize}
+\item $\mathbf{b_1} \in \mathbb{R}^{k \times 1}$
+\item $\mathbf{W_2} \in \mathbb{R}^{k \times k}$
+\item $\mathbf{b_2} \in \mathbb{R}^{k \times 1}$
+\item $\mathbf{W_3} \in \mathbb{R}^{1 \times k}$
+\item $\mathbf{b_3} \in \mathbb{R}^{1 \times 1}$
+
+\end{itemize}
+
+\paragraph{Problem 1}
+
+\paragraph{Problem 1}
+
+\paragraph{Problem 1}
+
+
+\end{document}
